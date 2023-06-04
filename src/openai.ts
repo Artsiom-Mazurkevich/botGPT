@@ -1,7 +1,8 @@
 import {ChatCompletionRequestMessage, Configuration, OpenAIApi} from 'openai'
-import config from "config";
+import config from "config"
 import {createReadStream} from 'fs'
-import {ChatCompletionRequestMessageRoleEnum} from "openai/api.js";
+import {ChatCompletionRequestMessageRoleEnum} from "openai/api.js"
+
 
 class OpenAI {
     roles: typeof ChatCompletionRequestMessageRoleEnum = {
@@ -9,7 +10,9 @@ class OpenAI {
         User: "user",
         Assistant: "assistant"
     }
+
     private openai: OpenAIApi;
+
     constructor(apiKey: string) {
         const configuration = new Configuration({
             apiKey,
@@ -25,7 +28,9 @@ class OpenAI {
             })
             return response.data.choices[0].message
         } catch (e) {
-            console.log(e)
+            if (e instanceof Error) {
+                console.log('Error in chat method: ',e.message)
+            }
         }
     }
 
@@ -33,13 +38,17 @@ class OpenAI {
     async transcription(filepath: string) {
         try {
             const response = await this.openai.createTranscription(
+                // @ts-ignore
                 createReadStream(filepath), 'whisper-1'
             )
             return response.data.text
         } catch (e) {
-            console.log(e)
+            if (e instanceof Error) {
+                console.log('Error in transcription method: ',e.message)
+            }
         }
     }
 }
+
 
 export const openai = new OpenAI(config.get('OPENAI_KEY'))

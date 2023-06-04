@@ -6,7 +6,8 @@
   "extends": ["plugin:@typescript-eslint/recommended"],
   "rules": {
     "@typescript-eslint/no-inferrable-types": "warn",
-    "@typescript-eslint/no-empty-function": "off"
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018,
