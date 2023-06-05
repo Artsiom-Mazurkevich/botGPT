@@ -2,6 +2,7 @@ import {ChatCompletionRequestMessage, Configuration, OpenAIApi} from 'openai'
 import config from "config"
 import {createReadStream} from 'fs'
 import {ChatCompletionRequestMessageRoleEnum} from "openai/api.js"
+import {EnvVariables} from "./main.js";
 
 
 class OpenAI {
@@ -51,4 +52,8 @@ class OpenAI {
 }
 
 
-export const openai = new OpenAI(config.get('OPENAI_KEY'))
+// export const openai = new OpenAI(config.get('OPENAI_KEY'))
+// @ts-ignore
+const env: EnvVariables = process.env as EnvVariables;
+const OPENAI_KEY = env.OPENAI_KEY;
+export const openai = new OpenAI(OPENAI_KEY)

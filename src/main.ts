@@ -1,9 +1,41 @@
 import {Telegraf, session, Context} from 'telegraf'
 import config from 'config'
 import {message} from "telegraf/filters";
+import { fileURLToPath } from 'url';
 import {code} from "telegraf/format";
 import {ogg} from './ogg.js'
 import {openai} from "./openai.js";
+import { config as dotenvConfig } from 'dotenv';
+import { dirname, join } from 'path';
+
+
+// Получение пути к текущему модулю
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
+export interface EnvVariables {
+    TG_TOKEN: string;
+    OPENAI_KEY: string;
+}
+
+// Загрузка переменных окружения из файла `.env`
+dotenvConfig({ path: join(__dirname, '..', '.env') });
+// @ts-ignore
+const env: EnvVariables = process.env as EnvVariables;
+const TG_TOKEN = env.TG_TOKEN;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 interface Ctx extends Context {
@@ -15,7 +47,8 @@ const INITIAL_SESSION = {
     messages: []
 }
 
-const BOT = new Telegraf<Ctx>(config.get('TG_TOKEN'))
+// const BOT = new Telegraf<Ctx>(config.get('TG_TOKEN'))
+const BOT = new Telegraf<Ctx>(TG_TOKEN)
 
 BOT.use(session())
 
