@@ -10,25 +10,22 @@ import { dirname, join } from 'path';
 
 
 // Получение пути к текущему модулю
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-
-export interface EnvVariables {
-    TG_TOKEN: string;
-    OPENAI_KEY: string;
-}
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
+//
+//
+// export interface EnvVariables {
+//     TG_TOKEN: string;
+//     OPENAI_KEY: string;
+// }
 
 // Загрузка переменных окружения из файла `.env`
-dotenvConfig({ path: join(__dirname, '..', '.env') });
+// dotenvConfig({ path: join(__dirname, '..', '.env') });
 // @ts-ignore
-const env: EnvVariables = process.env as EnvVariables;
-const TG_TOKEN = env.TG_TOKEN;
-
-
-
-
-
+// const env: EnvVariables = process.env as EnvVariables;
+// const TG_TOKEN = env.TG_TOKEN;
+//
+// console.log(TG_TOKEN)
 
 
 
@@ -47,8 +44,7 @@ const INITIAL_SESSION = {
     messages: []
 }
 
-// const BOT = new Telegraf<Ctx>(config.get('TG_TOKEN'))
-const BOT = new Telegraf<Ctx>(TG_TOKEN)
+const BOT = new Telegraf<Ctx>(config.get('TG_TOKEN'))
 
 BOT.use(session())
 
