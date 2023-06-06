@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "npx nodemon",
     "build": "rimraf ./dist && npm i && npx tsc",
-    "start": "node dist/bot.js",
+    "start": "node bot.js",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix"
   },
