@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "rimraf ./dist && npx tsc",
-    "start": "npm run build && node dist/bot",
+    "build": "rimraf ./dist && npm i && npx tsc",
+    "start": "node dist/bot.js",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix"
   },
