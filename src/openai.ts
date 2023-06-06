@@ -1,8 +1,11 @@
 import {ChatCompletionRequestMessage, Configuration, OpenAIApi} from 'openai'
-// import config from "config"
-import config from "./config.js";
+import config from "config"
+// import config from "./config.js";
 import {createReadStream} from 'fs'
 import {ChatCompletionRequestMessageRoleEnum} from "openai/api.js"
+import { config as dotenvConfig } from 'dotenv';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 
 class OpenAI {
@@ -53,8 +56,36 @@ class OpenAI {
 }
 
 
-export const openai = new OpenAI(config.OPENAI_KEY || '')
-// export const openai = new OpenAI(config.get('OPENAI_KEY'))
+
+
+
+// Получение пути к текущему модулю
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+//
+//
+export interface EnvVariables {
+    TG_TOKEN: string;
+    OPENAI_KEY: string;
+}
+
+// Загрузка переменных окружения из файла `.env`
+dotenvConfig({ path: join(__dirname, '..', '.env') });
+// @ts-ignore
+const env: EnvVariables = process.env as EnvVariables;
+const OPENAI_KEY = env.OPENAI_KEY;
+
+
+
+
+
+
+
+
+export const openai = new OpenAI(OPENAI_KEY)
+// export const openai = new OpenAI(process.env.OPENAI_KEY || "")
+
+// export const openai = new OpenAI(config.OPENAI_KEY || '')
 // @ts-ignore
 // const env: EnvVariables = process.env as EnvVariables;
 // const OPENAI_KEY = env.OPENAI_KEY;
