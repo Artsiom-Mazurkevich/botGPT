@@ -5,9 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon",
-    "build": "rimraf ./dist && npm i && npx tsc",
+    "build": "tsc",
     "start": "node dist/bot.js",
+    "dev": "npx nodemon",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix"
   },
