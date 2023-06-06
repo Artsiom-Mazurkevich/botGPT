@@ -1,5 +1,6 @@
 import {Telegraf, session, Context} from 'telegraf'
-import config from 'config'
+// import config from 'config'
+import config from "./config.js";
 import {message} from "telegraf/filters";
 import { fileURLToPath } from 'url';
 import {code} from "telegraf/format";
@@ -44,7 +45,8 @@ const INITIAL_SESSION = {
     messages: []
 }
 
-const BOT = new Telegraf<Ctx>(config.get('TG_TOKEN'))
+// const BOT = new Telegraf<Ctx>(config.get('TG_TOKEN'))
+const BOT = new Telegraf<Ctx>(config.TG_TOKEN || '')
 
 BOT.use(session())
 
